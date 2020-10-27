@@ -10,11 +10,12 @@ function averageMark(a, g, p) {
 	let algebra = a;
 	let geography = g;
 	let physics = p;
-	let result;
-	result = (algebra + geography + physics) / 3;
+	let averageRating;
+
+	averageRating = (algebra + geography + physics) / 3;
 
 
-	return result;
+	return averageRating;
 }
 
 function sayHello(userName) {
@@ -28,7 +29,12 @@ function sayHello(userName) {
 
 function calculateFormula() {
 
-	// реализуйте здесь задание №3
+	let x = 2;
+	let y = 22;
+	let z = 0;
+	let result;
 
-	return // ваш ответ;
+	result = x * y + 5 * z + x - 1;
+
+	return result;
 }
