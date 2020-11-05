@@ -1,9 +1,7 @@
 "use strict";
 function calculateTotalMortgage(percent, contribution, amount, date) {
 
-	if (!!percent) {
-
-	} else {
+	if (isNaN(percent)) {
 		return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
 	}
 
@@ -19,25 +17,22 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 		return `Параметр "Дата" содержит неправильное значение "${date}"`;
 	}
 
-	let n = (date.getFullYear() - new Date().getFullYear()) * 12;
+	const n = (date.getFullYear() - new Date().getFullYear()) * 12;
 	if (n <= 0) {
 		return `Параметр "Дата" содержит неправельное значение "${date}"`;
 	}
-	let S = amount - contribution;
-	let P = 1 / 12 * percent / 100;
-	let payment = S * (P + P / (((1 + P) ** n) - 1));
-	let totalAmount = parseFloat((payment * n).toFixed(2));
+	const S = amount - contribution;
+	const P = 1 / 12 * percent / 100;
+	if (P <= 0) {
+		return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
+	}
+	const payment = S * (P + P / (((1 + P) ** n) - 1));
+	const totalAmount = parseFloat((payment * n).toFixed(2));
 	console.log(totalAmount);
 	return totalAmount;
 }
 
 function getGreeting(name) {
-	if (!!name) {
-		name = name;
-	} else {
-		name = "Аноним";
-	}
-	let greeting = `Привет, мир! Меня зовут ${name}`;
-	console.log(greeting);
-	return greeting;
+
+	return `Привет, мир! Меня зовут ${name || "Аноним"}`;
 }
