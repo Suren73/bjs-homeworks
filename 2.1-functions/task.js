@@ -1,3 +1,4 @@
+'use strict';
 function getSolutions(a, b, c) {
 
 	const D = b ** 2 - 4 * a * c;
