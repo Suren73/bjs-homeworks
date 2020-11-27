@@ -2,7 +2,7 @@
 
 String.prototype.isPalindrome = function () {
 	let string = this;
-	string = string.toLowerCase().split('');
+	string = string.toLowerCase().split("");
 
 	for (let i = 0; i < string.length; i++) {
 		if (string[i] === " ") {
@@ -25,8 +25,8 @@ function getAverageMark(marks) {
 	for (let mark of marks) {
 		markSum += mark;
 	}
-	let average = markSum / marks.length;
-	let averageMark = Math.round(average);
+	const average = markSum / marks.length;
+	const averageMark = Math.round(average);
 
 	return averageMark;
 }
@@ -35,8 +35,8 @@ function checkBirthday(birthday) {
 	let now = Date.now();
 
 	let data = new Date(birthday);
-	birthday = +data;
-	let diff = now - birthday;
+	const parsedBirthday = new Date(birthday).getTime();
+	let diff = now - parsedBirthday;
 	const year = 31536000000;
 	let age = diff / year;
 	let verdict = (age > 18);
