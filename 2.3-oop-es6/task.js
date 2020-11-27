@@ -85,82 +85,54 @@ class Library {
 		this.books = [];
 	}
 	addBook(book) {
-		if (book.state > 0) {
+		// console.log(book.state);
+		if (book.state > 30) {
 			this.books.push(book);
 		}
 	}
 
 	findBookBy(type, value) {
-		for (let i = 0; i < this.books.length; i++) {
-			if (this.books[i][type] === value) {
-				return this.books[i];
-			}
+		let prop = this.books.find(obj => obj[type] === value);
+		if (prop) {
+			return prop;
 		}
 		return null;
 	}
 	giveBookByName(bookName) {
-		for (let i = 0; i < this.books.length; i++) {
-
-			if (this.books[i].name === bookName) {
-				return this.books.splice(i, 1);
-			}
+		let prop = this.books.find(obj => obj.name === bookName);
+		if (prop) {
+			let index = this.books.indexOf(prop);
+			let result = this.books.splice(index, 1);
+			return result[0];
 		}
+		console.log(prop);
 		return null;
 	}
 }
 
+//Создайте библиотеку;
 const library = new Library("Библиотека имени Ленина");
-
+// Добавьте в библиотеку несколько печатных изданий различных типов;
 library.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
 library.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
 library.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
-library.addBook(new Magazine("Мурзилка", 1924, 60));
-
-console.log(library.findBookBy("name", "Властелин колец")); //null
-console.log(library.findBookBy("releaseDate", 1924).name); //"Мурзилка"
-
-console.log("Количество книг до выдачи: " + library.books.length); //Количество книг до выдачи: 4
-library.giveBookByName("Машина времени");
-
-console.log(library.giveBookByName(""));
-console.log("Количество книг после выдачи: " + library.books.length); //Количество книг после выдачи: 3
-console.log('');
-
-//Создайте библиотеку;
-const newLibrary = new Library("Моя первая библиотека");
-
-// Добавьте в библиотеку несколько печатных изданий различных типов;
-newLibrary.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
-newLibrary.addBook(new DetectiveBook("Майк Омер", "Внутри убийцы", 2019, 340));
-newLibrary.addBook(new FantasticBook("Макс Глебов", "Кодекс самурая", 2020, 320));
-newLibrary.addBook(new NovelBook("Михаил Булгаков", "Мастер и Маргарита", 1961, 470));
-newLibrary.addBook(new Magazine("Юный техник", 1919, 84));
-newLibrary.addBook(new Magazine("Типовой школьный журнал", 2020, 24));
-
+library.addBook(new Magazine("Мурзилка", 1919, 60));
 // Найдите книгу, изданную в 1919 году (создайте такую книгу при необходимости);
-console.log(newLibrary.findBookBy("releaseDate", 1919).name); //"Юный техник"
-console.log(newLibrary.findBookBy("pagesCount", 470).name); //"Мастер и Маргарита"
-console.log(newLibrary.findBookBy("pagesCount", 24).name); //"Типовой школьный журнал"
-
-console.log("Количество книг до выдачи: " + newLibrary.books.length);
+console.log(library.findBookBy("releaseDate", 1919).name); //"Мурзилка"
 // Выдайте любую книгу;
-newLibrary.giveBookByName("Типовой школьный журнал");
-
-console.log("Количество книг после выдачи: " + newLibrary.books.length);
+console.log("Количество книг до выдачи: " + library.books.length); //Количество книг до выдачи: 4
+const timeMachine = library.giveBookByName("Машина времени");
+console.log("Количество книг после выдачи: " + library.books.length); //Количество книг после выдачи: 3
 // Испортите выданную книгу;
-const schoolMagazine = new PrintEditionItem("Типовой школьный журнал", 2020, 24);
-schoolMagazine.state = 10;
-console.log(schoolMagazine.state);
-
+timeMachine.state = 30;
+console.log(timeMachine.state);
 // Почините выданную книгу;
-schoolMagazine.fix();
-console.log(schoolMagazine.state);
+timeMachine.fix();
+console.log(timeMachine.state);
 // Попытайтесь добавить починенную книгу обратно в библиотеку.
-newLibrary.addBook(new Magazine("Типовой школьный журнал", 2020, 24));
-console.log("Количество книг после добавления: " + newLibrary.books.length);
-
+library.addBook(timeMachine);
+console.log("Количество книг после добавления: " + library.books.length);
 console.log('');
-
 
 class StudentLog {
 	constructor(name) {
