@@ -63,21 +63,10 @@ console.log(getAverageScore({ algebra: [1, 2] }));
 console.log('');
 
 function getPersonData(secretData) {
-	newSecretData = {};
-	for (let prop in secretData) {
-		let secret = secretData[prop];
-		console.log(secret);
-
-		if (prop === "aaa") {
-			variable = "firstName";
-		} else {
-			variable = "lastName";
-		}
-		let value = getDecodedValue(secret);
-		console.log(value);
-		newSecretData[variable] = value;
+	return {
+		firstName: getDecodedValue(secretData.aaa),
+		lastName: getDecodedValue(secretData.bbb)
 	}
-	return newSecretData;
 }
 function getDecodedValue(secret) {
 	let value = (secret) ? "Эмильо" : "Родриго";
