@@ -27,29 +27,22 @@ class Triangle {
 		}
 	}
 	getPerimeter() {
-		const P = this.a + this.b + this.c;
-		return P;
+		return this.a + this.b + this.c;
 	}
 	getArea() {
 		const p = this.getPerimeter() / 2;
-		const S = +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3);
-		return S;
+		return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3);
 	}
 }
 
 function getTriangle(a, b, c) {
 
 	try {
-		const triangle = new Triangle(a, b, c);
-		return triangle;
+		return new Triangle(a, b, c);
 	} catch (error) {
-		const triangle = new Object();
-		triangle.getPerimeter = function () {
-			return 'Ошибка! Треугольник не существует';
-		};
-		triangle.getArea = function () {
-			return 'Ошибка! Треугольник не существует';
+		return {
+			getPerimeter: () => 'Ошибка! Треугольник не существует',
+			getArea: () => 'Ошибка! Треугольник не существует',
 		}
-		return triangle;
 	}
 }
