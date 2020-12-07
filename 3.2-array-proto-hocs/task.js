@@ -18,20 +18,16 @@ function compareArrays(arr1, arr2) {
 function memorize(fn, limit) {
 	const memory = [];
 	return function (...args) {
-		let arr = Array.from(args);
-		let result = 0;
-		let len = memory.length;
+		let arr = args;
 		let prop = memory.find(obj => compareArrays(obj.args, arr));
 		if (prop) {
 			return prop.result;
 		}
-		else {
-			result = fn(...args);
-			memory.push({ 'args': arr, 'result': result })
-			if (len > limit) {
-				memory.shift();
-			}
-			return result;
+		let result = fn(...args);
+		memory.push({ args, result })
+		if (memory.length > limit) {
+			memory.shift();
 		}
+		return result;
 	}
 }
